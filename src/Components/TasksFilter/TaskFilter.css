@@ -3,21 +3,16 @@
     padding: 0;
     list-style: none;
     display: flex;
-    /* Используем flexbox для выравнивания */
     justify-content: flex-start;
-    /* Выравнивание по левому краю */
 }
 
 .filters label {
     cursor: default;
-    /* Указываем курсор по умолчанию */
     margin: 0 3px;
-    /* Отступ между метками */
 }
 
 .filters input[type="radio"] {
     display: none;
-    /* Скрываем радиокнопки */
 }
 
 .filters label {

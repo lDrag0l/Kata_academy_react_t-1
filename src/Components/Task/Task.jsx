@@ -29,14 +29,14 @@ export default class Task extends Component {
         }
 
         return (
-            <li className={listView} key={id}>
+            <li className={listView}>
                 <div className="view">
                     <input className="toggle" type="checkbox" onClick={onToggleDone}></input>
                     <label>
                         <span className="description">{description}</span>
                         <span className="created">{created}</span>
                     </label>
-                    <button type='button' className="icon icon-edit" onClick={onToggleEdit} ></button>
+                    <button type='button' className="icon icon-edit" onClick={onToggleEdit}></button>
                     <button type='button' className="icon icon-destroy" onClick={onDeleted}></button>
                 </div>
                 {

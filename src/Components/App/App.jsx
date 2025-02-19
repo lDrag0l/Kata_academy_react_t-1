@@ -141,6 +141,7 @@ export default class App extends Component {
 
     const doneCount = Data.filter((el) => el.done).length
     const todoCount = Data.length - doneCount
+
     const filteredTasks = Data.filter((task) => {
       if (selectedFilter === 'Active') return !task.done;
       if (selectedFilter === 'Completed') return task.done;
