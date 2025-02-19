@@ -98,6 +98,39 @@ export default class App extends Component {
     })
   }
 
+  onClearDone = () => {
+    this.setState(({ Data }) => {
+      const newData = []
+
+      Data.forEach((item) => {
+        if (!item.done) newData.push(item)
+      })
+
+      return {
+        Data: newData
+      }
+    })
+  }
+
+  onEditTask = (id, text) => {
+    this.setState(({ Data }) => {
+      const inx = Data.findIndex((el) => el.id === id)
+
+      const oldItem = Data[inx]
+      const newItem = { ...oldItem, description: text, editing: false }
+
+      const newData = [
+        ...Data.slice(0, inx),
+        newItem,
+        ...Data.slice(inx + 1)
+      ];
+
+      return {
+        Data: newData
+      }
+    })
+  }
+
   render() {
     const { Data, label } = this.state
     const doneCount = Data.filter((el) => el.done).length
@@ -110,8 +143,9 @@ export default class App extends Component {
           toDos={Data}
           onDeleted={this.deleteItem}
           onToggleDone={this.onToggleDone}
-          onToggleEdit={this.onToggleEdit} />
-        <Footer todoCount={todoCount} />
+          onToggleEdit={this.onToggleEdit}
+          onEditTask={this.onEditTask} />
+        <Footer todoCount={todoCount} onClearDone={this.onClearDone} />
       </form>
     )
   }
