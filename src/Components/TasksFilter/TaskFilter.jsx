@@ -1,19 +1,41 @@
-import './TaskFilter.css'
+import { Component } from 'react';
+import './TaskFilter.css';
 
-function TasksFilter() {
-    return (
-        <div className='filters'>
-            <li>
-                <button type='button' className="selected">All</button>
-            </li>
-            <li>
-                <button type='button'>Active</button>
-            </li>
-            <li>
-                <button type='button'>Completed</button>
-            </li>
-        </div>
-    )
+export default class TasksFilter extends Component {
+    render() {
+        const { onChangeFilter, selectedFilter } = this.props;
+        return (
+            <div className='filters'>
+                <label className={selectedFilter === 'All' ? 'selected' : ''}>
+                    <input
+                        type="radio"
+                        name="taskFilter"
+                        value="All"
+                        onChange={() => onChangeFilter('All')}
+                    />
+                    All
+                </label>
+
+                <label className={selectedFilter === 'Active' ? 'selected' : ''}>
+                    <input
+                        type="radio"
+                        name="taskFilter"
+                        value="Active"
+                        onChange={() => onChangeFilter('Active')}
+                    />
+                    Active
+                </label>
+
+                <label className={selectedFilter === 'Completed' ? 'selected' : ''}>
+                    <input
+                        type="radio"
+                        name="taskFilter"
+                        value="Completed"
+                        onChange={() => onChangeFilter('Completed')}
+                    />
+                    Completed
+                </label>
+            </div>
+        );
+    }
 }
-
-export default TasksFilter

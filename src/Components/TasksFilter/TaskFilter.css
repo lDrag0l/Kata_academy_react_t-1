@@ -2,16 +2,25 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    right: 0;
-    left: 0;
+    display: flex;
+    /* Используем flexbox для выравнивания */
+    justify-content: flex-start;
+    /* Выравнивание по левому краю */
 }
 
-.filters li {
-    display: inline;
+.filters label {
     cursor: default;
+    /* Указываем курсор по умолчанию */
+    margin: 0 3px;
+    /* Отступ между метками */
 }
 
-.filters li button {
+.filters input[type="radio"] {
+    display: none;
+    /* Скрываем радиокнопки */
+}
+
+.filters label {
     display: inline-block;
     color: inherit;
     margin: 3px;
@@ -19,19 +28,22 @@
     text-decoration: none;
     border: 1px solid transparent;
     border-radius: 3px;
+    position: relative;
 }
 
-.filters li button:not(.selected) {
-    cursor: pointer;
+.filters input[type="radio"]:checked+label {
+    border-color: rgba(175, 47, 47, 0.2);
+
 }
 
-.filters li:hover button {
+.filters label:hover {
     border-color: rgba(175, 47, 47, 0.1);
 }
 
-.filters li button.selected {
+.filters label.selected {
     border-color: rgba(175, 47, 47, 0.2);
 }
+
 
 @media (max-width: 430px) {
     .filters {

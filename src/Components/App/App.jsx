@@ -24,7 +24,8 @@ export default class App extends Component {
       this.createTodoItem('Editing task'),
       this.createTodoItem('Active task')
     ],
-    label: ''
+    label: '',
+    selectedFilter: 'All'
   }
 
   onToggleDone = (id) => {
@@ -131,21 +132,37 @@ export default class App extends Component {
     })
   }
 
+  onChangeFilter = (filter) => {
+    this.setState({ selectedFilter: filter });
+  };
+
   render() {
-    const { Data, label } = this.state
+    const { Data, label, selectedFilter } = this.state
+
     const doneCount = Data.filter((el) => el.done).length
     const todoCount = Data.length - doneCount
+    const filteredTasks = Data.filter((task) => {
+      if (selectedFilter === 'Active') return !task.done;
+      if (selectedFilter === 'Completed') return task.done;
+      return true;
+    });
 
     return (
       <form className='todoapp' onSubmit={this.onSubmit}>
         <Header onChangeInput={this.onChangeInput} label={label} />
         <TaskList
-          toDos={Data}
+          toDos={filteredTasks}
           onDeleted={this.deleteItem}
           onToggleDone={this.onToggleDone}
           onToggleEdit={this.onToggleEdit}
-          onEditTask={this.onEditTask} />
-        <Footer todoCount={todoCount} onClearDone={this.onClearDone} />
+          onEditTask={this.onEditTask}
+        />
+        <Footer
+          todoCount={todoCount}
+          onClearDone={this.onClearDone}
+          onChangeFilter={this.onChangeFilter}
+          selectedFilter={selectedFilter}
+        />
       </form>
     )
   }
