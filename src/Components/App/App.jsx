@@ -7,8 +7,7 @@ import TaskList from '../TaskList'
 import { Component } from 'react'
 
 export default class App extends Component {
-
-  maxID = 100;
+  maxID = 100
 
   createTodoItem = (description) => {
     return {
@@ -16,7 +15,7 @@ export default class App extends Component {
       created: new Date(),
       done: false,
       editing: false,
-      id: this.maxID++
+      id: this.maxID++,
     }
   }
 
@@ -24,10 +23,10 @@ export default class App extends Component {
     Data: [
       this.createTodoItem('Completed task'),
       this.createTodoItem('Editing task'),
-      this.createTodoItem('Active task')
+      this.createTodoItem('Active task'),
     ],
     label: '',
-    selectedFilter: 'All'
+    selectedFilter: 'All',
   }
 
   onToggleDone = (id) => {
@@ -37,14 +36,10 @@ export default class App extends Component {
       const oldItem = Data[inx]
       const newItem = { ...oldItem, done: !oldItem.done }
 
-      const newData = [
-        ...Data.slice(0, inx),
-        newItem,
-        ...Data.slice(inx + 1)
-      ];
+      const newData = [...Data.slice(0, inx), newItem, ...Data.slice(inx + 1)]
 
       return {
-        Data: newData
+        Data: newData,
       }
     })
   }
@@ -56,35 +51,29 @@ export default class App extends Component {
       const oldItem = Data[inx]
       const newItem = { ...oldItem, editing: !oldItem.editing }
 
-      const newData = [
-        ...Data.slice(0, inx),
-        newItem,
-        ...Data.slice(inx + 1)
-      ];
+      const newData = [...Data.slice(0, inx), newItem, ...Data.slice(inx + 1)]
 
       return {
-        Data: newData
+        Data: newData,
       }
     })
   }
 
   deleteItem = (id) => {
     this.setState(({ Data }) => {
-
       const inx = Data.findIndex((el) => el.id === id)
 
       const newData = Data.toSpliced(inx, 1)
 
       return {
-        Data: newData
+        Data: newData,
       }
-
     })
   }
 
   onChangeInput = (event) => {
     this.setState({
-      label: event.target.value
+      label: event.target.value,
     })
   }
 
@@ -96,7 +85,7 @@ export default class App extends Component {
 
       return {
         Data: newData,
-        label: ''
+        label: '',
       }
     })
   }
@@ -110,7 +99,7 @@ export default class App extends Component {
       })
 
       return {
-        Data: newData
+        Data: newData,
       }
     })
   }
@@ -122,21 +111,17 @@ export default class App extends Component {
       const oldItem = Data[inx]
       const newItem = { ...oldItem, description: text, editing: false }
 
-      const newData = [
-        ...Data.slice(0, inx),
-        newItem,
-        ...Data.slice(inx + 1)
-      ];
+      const newData = [...Data.slice(0, inx), newItem, ...Data.slice(inx + 1)]
 
       return {
-        Data: newData
+        Data: newData,
       }
     })
   }
 
   onChangeFilter = (filter) => {
-    this.setState({ selectedFilter: filter });
-  };
+    this.setState({ selectedFilter: filter })
+  }
 
   render() {
     const { Data, label, selectedFilter } = this.state
@@ -145,13 +130,13 @@ export default class App extends Component {
     const todoCount = Data.length - doneCount
 
     const filteredTasks = Data.filter((task) => {
-      if (selectedFilter === 'Active') return !task.done;
-      if (selectedFilter === 'Completed') return task.done;
-      return true;
-    });
+      if (selectedFilter === 'Active') return !task.done
+      if (selectedFilter === 'Completed') return task.done
+      return true
+    })
 
     return (
-      <form className='todoapp' onSubmit={this.onSubmit}>
+      <form className="todoapp" onSubmit={this.onSubmit}>
         <Header onChangeInput={this.onChangeInput} label={label} />
         <TaskList
           toDos={filteredTasks}
