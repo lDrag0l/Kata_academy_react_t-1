@@ -34,7 +34,7 @@ export default class Task extends Component {
     return (
       <li className={listView}>
         <div className="view">
-          <input className="toggle" type="checkbox" onClick={onToggleDone}></input>
+          <input className="toggle" type="checkbox" onClick={onToggleDone} defaultChecked={done}></input>
           <label>
             <span className="description">{description}</span>
             <span className="created">{formatDistanceToNowStrict(created, { addSuffix: true })}</span>
@@ -71,7 +71,7 @@ Task.defaultProps = {
   created: 'Item create time',
   editing: false,
   done: false,
-  onDeleted: () => {},
-  onToggleDone: () => {},
-  onToggleEdit: () => {},
+  onDeleted: () => { },
+  onToggleDone: () => { },
+  onToggleEdit: () => { },
 }
