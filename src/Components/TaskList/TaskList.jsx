@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import './TaskList.css'
 import Task from '../Task'
+import PropTypes from 'prop-types';
 export default class TaskList extends Component {
 
     render() {
@@ -28,4 +29,17 @@ export default class TaskList extends Component {
             </section>
         )
     }
+}
+TaskList.propTypes = {
+    onDeleted: PropTypes.func,
+    onToggleDone: PropTypes.func,
+    onToggleEdit: PropTypes.func,
+    onEditTask: PropTypes.func
+}
+
+TaskList.defaultProps = {
+    onDeleted: () => { },
+    onToggleDone: () => { },
+    onToggleEdit: () => { },
+    onEditTask: () => { }
 }

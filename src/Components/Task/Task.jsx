@@ -1,5 +1,7 @@
+import { formatDistanceToNowStrict } from 'date-fns';
 import './Task.css'
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Task extends Component {
 
@@ -18,8 +20,10 @@ export default class Task extends Component {
     };
 
     render() {
-        let { id, description, created, onDeleted, onToggleDone, done, onToggleEdit, editing } = this.props;
+        let { description, created, onDeleted, onToggleDone, done, onToggleEdit, editing } = this.props;
+
         let listView = ''
+
         if (done) {
             listView = 'completed'
         }
@@ -34,7 +38,7 @@ export default class Task extends Component {
                     <input className="toggle" type="checkbox" onClick={onToggleDone}></input>
                     <label>
                         <span className="description">{description}</span>
-                        <span className="created">{created}</span>
+                        <span className="created">{formatDistanceToNowStrict(created, { addSuffix: true })}</span>
                     </label>
                     <button type='button' className="icon icon-edit" onClick={onToggleEdit}></button>
                     <button type='button' className="icon icon-destroy" onClick={onDeleted}></button>
@@ -46,7 +50,7 @@ export default class Task extends Component {
                             className="edit"
                             defaultValue={description}
                             onChange={this.handleChange}
-                            onKeyPress={this.handleKeyPress}
+                            onKeyDown={this.handleKeyPress}
                         ></input>
                     )
                 }
@@ -55,4 +59,24 @@ export default class Task extends Component {
 
     }
 
+}
+
+Task.propTypes = {
+    description: PropTypes.string,
+    created: PropTypes.instanceOf(Date),
+    editing: PropTypes.bool,
+    done: PropTypes.bool,
+    onDeleted: PropTypes.func,
+    onToggleDone: PropTypes.func,
+    onToggleEdit: PropTypes.func
+}
+
+Task.defaultProps = {
+    description: 'item description',
+    created: 'Item create time',
+    editing: false,
+    done: false,
+    onDeleted: () => { },
+    onToggleDone: () => { },
+    onToggleEdit: () => { }
 }

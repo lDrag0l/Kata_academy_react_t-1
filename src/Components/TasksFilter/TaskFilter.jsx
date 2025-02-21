@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import './TaskFilter.css';
+import PropTypes from 'prop-types';
 
 export default class TasksFilter extends Component {
     render() {
@@ -38,4 +39,15 @@ export default class TasksFilter extends Component {
             </div>
         );
     }
+}
+
+TasksFilter.propTypes = {
+    onChangeFilter: PropTypes.func,
+    selectedFilter: PropTypes.string
+}
+
+
+TasksFilter.defaultProps = {
+    onChangeFilter: () => { },
+    selectedFilter: 'All'
 }

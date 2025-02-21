@@ -1,8 +1,10 @@
-import { Component } from 'react'
 import './App.css'
+
 import Header from '../Header'
 import Footer from '../Footer'
 import TaskList from '../TaskList'
+
+import { Component } from 'react'
 
 export default class App extends Component {
 
@@ -11,7 +13,7 @@ export default class App extends Component {
   createTodoItem = (description) => {
     return {
       description,
-      created: '5 min ago',
+      created: new Date(),
       done: false,
       editing: false,
       id: this.maxID++
